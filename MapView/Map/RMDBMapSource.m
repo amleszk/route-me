@@ -109,7 +109,7 @@
 		// open the db
 		NSString* fullPath = [[NSBundle mainBundle] pathForResource:path ofType:nil];
 		NSLog(@"Trying to Open db map source %@", fullPath);
-		db = [[FMDatabase alloc] initWithPath:fullPath];
+		db = [[RMFMDatabase alloc] initWithPath:fullPath];
 		if ([db open]) {
 			RMLog(@"Opening db map source %@", path);
 			
@@ -253,7 +253,7 @@
 -(NSString*)getPreferenceAsString:(NSString*)name {
 	NSString* value = nil;
 	
-	FMResultSet* rs = [db executeQuery:@"select value from preferences where name = ?", name];
+	RMFMResultSet * rs = [db executeQuery:@"select value from preferences where name = ?", name];
 	if ([rs next]) {
 		value = [rs stringForColumn:@"value"];
 	}

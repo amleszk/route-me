@@ -29,6 +29,6 @@
 
 @interface RMDBTileImage : RMTileImage {}
 
-- (id)initWithTile:(RMTile)tile fromDB:(FMDatabase*)db;
+- (id)initWithTile:(RMTile)tile fromDB:(RMFMDatabase *)db;
 
 @end

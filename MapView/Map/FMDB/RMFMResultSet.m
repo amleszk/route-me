@@ -1,17 +1,17 @@
-#import "FMResultSet.h"
-#import "FMDatabase.h"
+#import "RMFMResultSet.h"
+#import "RMFMDatabase.h"
 #import "unistd.h"
 
-@interface FMResultSet (Private)
+@interface RMFMResultSet (Private)
 - (NSMutableDictionary *)columnNameToIndexMap;
 - (void)setColumnNameToIndexMap:(NSMutableDictionary *)value;
 @end
 
-@implementation FMResultSet
+@implementation RMFMResultSet
 
-+ (id) resultSetWithStatement:(FMStatement *)statement usingParentDatabase:(FMDatabase*)aDB {
++ (id) resultSetWithStatement:(FMStatement *)statement usingParentDatabase:(RMFMDatabase *)aDB {
     
-    FMResultSet *rs = [[FMResultSet alloc] init];
+    RMFMResultSet *rs = [[RMFMResultSet alloc] init];
     
     [rs setStatement:statement];
     [rs setParentDB:aDB];
@@ -291,7 +291,7 @@
 	return [NSString stringWithUTF8String: sqlite3_column_name(statement.statement, columnIdx)];
 }
 
-- (void)setParentDB:(FMDatabase *)newDb {
+- (void)setParentDB:(RMFMDatabase *)newDb {
     parentDB = newDb;
 }
 

@@ -37,7 +37,7 @@
 #import "RMProjection.h"
 #import "RMFractalTileProjection.h"
 
-#import "FMDatabase.h"
+#import "RMFMDatabase.h"
 
 @implementation RMMBTilesTileSource
 
@@ -51,7 +51,7 @@
                                                                  maxZoom:kMBTilesDefaultMaxTileZoom 
                                                                  minZoom:kMBTilesDefaultMinTileZoom];
 	
-    db = [[FMDatabase databaseWithPath:[tileSetURL relativePath]] retain];
+    db = [[RMFMDatabase databaseWithPath:[tileSetURL relativePath]] retain];
     
     if ( ! [db open])
         return nil;
@@ -89,7 +89,7 @@
     NSInteger x    = tile.x;
     NSInteger y    = pow(2, zoom) - tile.y - 1;
 
-    FMResultSet *results = [db executeQuery:@"select tile_data from tiles where zoom_level = ? and tile_column = ? and tile_row = ?", 
+    RMFMResultSet *results = [db executeQuery:@"select tile_data from tiles where zoom_level = ? and tile_column = ? and tile_row = ?",
                                [NSNumber numberWithFloat:zoom], 
                                [NSNumber numberWithFloat:x], 
                                [NSNumber numberWithFloat:y]];
@@ -141,7 +141,7 @@
 
 - (float)minZoom
 {
-    FMResultSet *results = [db executeQuery:@"select min(zoom_level) from tiles"];
+    RMFMResultSet *results = [db executeQuery:@"select min(zoom_level) from tiles"];
     
     if ([db hadError])
         return kMBTilesDefaultMinTileZoom;
@@ -157,7 +157,7 @@
 
 - (float)maxZoom
 {
-    FMResultSet *results = [db executeQuery:@"select max(zoom_level) from tiles"];
+    RMFMResultSet *results = [db executeQuery:@"select max(zoom_level) from tiles"];
     
     if ([db hadError])
         return kMBTilesDefaultMaxTileZoom;
@@ -183,7 +183,7 @@
 
 - (RMSphericalTrapezium)latitudeLongitudeBoundingBox
 {
-    FMResultSet *results = [db executeQuery:@"select value from metadata where name = 'bounds'"];
+    RMFMResultSet *results = [db executeQuery:@"select value from metadata where name = 'bounds'"];
     
     if ([db hadError])
         return kMBTilesDefaultLatLonBoundingBox;
@@ -232,7 +232,7 @@
 
 - (RMMBTilesLayerType)layerType
 {
-    FMResultSet *results = [db executeQuery:@"select value from metadata where name = 'type'"];
+    RMFMResultSet *results = [db executeQuery:@"select value from metadata where name = 'type'"];
     
     if ([db hadError])
         return RMMBTilesLayerTypeBaselayer;
@@ -251,7 +251,7 @@
 
 - (NSString *)legend
 {
-    FMResultSet *results = [db executeQuery:@"select value from metadata where name = 'legend'"];
+    RMFMResultSet *results = [db executeQuery:@"select value from metadata where name = 'legend'"];
     
     if ([db hadError])
         return nil;
@@ -280,7 +280,7 @@
 
 - (NSString *)shortName
 {
-    FMResultSet *results = [db executeQuery:@"select value from metadata where name = 'name'"];
+    RMFMResultSet *results = [db executeQuery:@"select value from metadata where name = 'name'"];
     
     if ([db hadError])
         return @"Unknown MBTiles";
@@ -296,7 +296,7 @@
 
 - (NSString *)longDescription
 {
-    FMResultSet *results = [db executeQuery:@"select value from metadata where name = 'description'"];
+    RMFMResultSet *results = [db executeQuery:@"select value from metadata where name = 'description'"];
     
     if ([db hadError])
         return @"Unknown MBTiles description";
@@ -312,7 +312,7 @@
 
 - (NSString *)shortAttribution
 {
-    FMResultSet *results = [db executeQuery:@"select value from metadata where name = 'attribution'"];
+    RMFMResultSet *results = [db executeQuery:@"select value from metadata where name = 'attribution'"];
     
     if ([db hadError])
         return @"Unknown MBTiles attribution";

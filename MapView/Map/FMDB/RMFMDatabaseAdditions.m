@@ -1,15 +1,15 @@
 //
-//  FMDatabaseAdditions.m
+//  RMFMDatabaseAdditions.m
 //  fmkit
 //
 //  Created by August Mueller on 10/30/05.
 //  Copyright 2005 Flying Meat Inc.. All rights reserved.
 //
 
-#import "FMDatabase.h"
-#import "FMDatabaseAdditions.h"
+#import "RMFMDatabase.h"
+#import "RMFMDatabaseAdditions.h"
 
-@implementation FMDatabase (FMDatabaseAdditions)
+@implementation RMFMDatabase (FMDatabaseAdditions)
 
 #define RETURN_RESULT_FOR_QUERY_WITH_SELECTOR(type, sel)             \
 va_list args;                                                        \

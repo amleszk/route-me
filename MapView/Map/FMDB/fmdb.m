@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
-#import "FMDatabase.h"
-#import "FMDatabaseAdditions.h"
+#import "RMFMDatabase.h"
+#import "RMFMDatabaseAdditions.h"
 
 #define FMDBQuickCheck(SomeBool) { if (!(SomeBool)) { NSLog(@"Failure on line %d", __LINE__); return 123; } }
 
@@ -11,7 +11,7 @@ int main (int argc, const char * argv[]) {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeFileAtPath:@"/tmp/tmp.db" handler:nil];
     
-    FMDatabase* db = [FMDatabase databaseWithPath:@"/tmp/tmp.db"];
+    RMFMDatabase * db = [RMFMDatabase databaseWithPath:@"/tmp/tmp.db"];
     if (![db open]) {
         NSLog(@"Could not open db.");
         [pool release];
@@ -67,7 +67,7 @@ int main (int argc, const char * argv[]) {
     
     
     
-    FMResultSet *rs = [db executeQuery:@"select rowid,* from test where a = ?", @"hi'"];
+    RMFMResultSet *rs = [db executeQuery:@"select rowid,* from test where a = ?", @"hi'"];
     while ([rs next]) {
         // just print out what we've got in a number of formats.
         NSLog(@"%d %@ %@ %@ %@ %f %f",
@@ -138,7 +138,7 @@ int main (int argc, const char * argv[]) {
     
     [db setBusyRetryTimeout:50000];
     
-    FMDatabase *newDb = [FMDatabase databaseWithPath:@"/tmp/tmp.db"];
+    RMFMDatabase *newDb = [RMFMDatabase databaseWithPath:@"/tmp/tmp.db"];
     [newDb open];
     
     rs = [newDb executeQuery:@"select rowid,* from test where a = ?", @"hi'"];
@@ -234,7 +234,7 @@ int main (int argc, const char * argv[]) {
         [db executeUpdate:@"update t3 set a = ? where a = ?" , [NSNumber numberWithInt:newVal], [NSNumber numberWithInt:foo]];
         
         
-        FMResultSet *rs2 = [db executeQuery:@"select a from t3 where a = ?", [NSNumber numberWithInt:newVal]];
+        RMFMResultSet *rs2 = [db executeQuery:@"select a from t3 where a = ?", [NSNumber numberWithInt:newVal]];
         [rs2 next];
         
         if ([rs2 intForColumnIndex:0] != newVal) {
@@ -480,13 +480,13 @@ int main (int argc, const char * argv[]) {
     if ([db shouldCacheStatements]) {
         
         NSEnumerator *e = [[db cachedStatements] objectEnumerator];;
-        FMStatement *statement;
+        RMFMStatement *statement;
         
         while ((statement = [e nextObject])) {
         	NSLog(@"%@", statement);
         }
     }
-    NSLog(@"That was version %@ of sqlite", [FMDatabase sqliteLibVersion]);
+    NSLog(@"That was version %@ of sqlite", [RMFMDatabase sqliteLibVersion]);
     
     
     [db close];

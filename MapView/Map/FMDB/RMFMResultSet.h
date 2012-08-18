@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
 #import "sqlite3.h"
 
-@class FMDatabase;
+@class RMFMDatabase;
 @class FMStatement;
 
-@interface FMResultSet : NSObject {
-    FMDatabase *parentDB;
+@interface RMFMResultSet : NSObject {
+    RMFMDatabase *parentDB;
     FMStatement *statement;
     
     NSString *query;
@@ -14,7 +14,7 @@
 }
 
 
-+ (id) resultSetWithStatement:(FMStatement *)statement usingParentDatabase:(FMDatabase*)aDB;
++ (id) resultSetWithStatement:(FMStatement *)statement usingParentDatabase:(RMFMDatabase *)aDB;
 
 - (void) close;
 
@@ -24,7 +24,7 @@
 - (FMStatement *)statement;
 - (void)setStatement:(FMStatement *)value;
 
-- (void)setParentDB:(FMDatabase *)newDb;
+- (void)setParentDB:(RMFMDatabase *)newDb;
 
 - (BOOL) next;
 - (BOOL) hasAnotherRow;

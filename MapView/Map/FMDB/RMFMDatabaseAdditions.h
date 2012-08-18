@@ -1,5 +1,5 @@
 //
-//  FMDatabaseAdditions.h
+//  RMFMDatabaseAdditions.h
 //  fmkit
 //
 //  Created by August Mueller on 10/30/05.
@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@interface FMDatabase (FMDatabaseAdditions)
+@interface RMFMDatabase (RMFMDatabaseAdditions)
 
 
 - (int)intForQuery:(NSString*)objs, ...;

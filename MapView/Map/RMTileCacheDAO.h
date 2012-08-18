@@ -27,11 +27,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class FMDatabase;
+@class RMFMDatabase;
 
 /// the interface between RMDatabaseCache and FMDB
 @interface RMTileCacheDAO : NSObject {
-	FMDatabase* db;	
+	RMFMDatabase * db;
 }
 
 -(id) initWithDatabase: (NSString*)path;

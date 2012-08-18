@@ -116,7 +116,7 @@
 	return [tileImage autorelease];
 }
 
-+ (RMTileImage*)imageForTile:(RMTile) _tile fromDB: (FMDatabase*)db
++ (RMTileImage*)imageForTile:(RMTile) _tile fromDB: (RMFMDatabase *)db
 {
 	return [[[RMDBTileImage alloc] initWithTile: _tile fromDB:db] autorelease];
 }

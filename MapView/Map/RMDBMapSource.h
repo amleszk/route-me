@@ -28,11 +28,11 @@
 
 #import "RMTileSource.h"
 #import "RMProjection.h"
-#import "FMDatabase.h"
+#import "RMFMDatabase.h"
 
 @interface RMDBMapSource : NSObject<RMTileSource> {
 	// tile database
-	FMDatabase* db;
+    RMFMDatabase * db;
 	
 	// projection
 	RMFractalTileProjection *tileProjection;

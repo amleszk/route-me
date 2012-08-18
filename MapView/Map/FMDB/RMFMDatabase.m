@@ -1,7 +1,7 @@
-#import "FMDatabase.h"
+#import "RMFMDatabase.h"
 #import "unistd.h"
 
-@implementation FMDatabase
+@implementation RMFMDatabase
 
 + (id)databaseWithPath:(NSString*)aPath {
     return [[[self alloc] initWithPath:aPath] autorelease];

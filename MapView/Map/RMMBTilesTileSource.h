@@ -40,7 +40,7 @@
 #import "RMTileSource.h"
 
 @class RMFractalTileProjection;
-@class FMDatabase;
+@class RMFMDatabase;
 
 #define kMBTilesDefaultTileSize 256
 #define kMBTilesDefaultMinTileZoom 0
@@ -56,7 +56,7 @@ typedef enum {
 @interface RMMBTilesTileSource : NSObject <RMTileSource>
 {
     RMFractalTileProjection *tileProjection;
-    FMDatabase *db;
+    RMFMDatabase *db;
 }
 
 - (id)initWithTileSetURL:(NSURL *)tileSetURL;

@@ -26,7 +26,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #import "RMTileCacheDAO.h"
-#import "FMDatabase.h"
+#import "RMFMDatabase.h"
 #import "RMTileCache.h"
 #import "RMTileImage.h"
 
@@ -49,7 +49,7 @@
 
 	RMLog(@"Opening database at %@", path);
 	
-	db = [[FMDatabase alloc] initWithPath:path];
+	db = [[RMFMDatabase alloc] initWithPath:path];
 	if (![db open])
 	{
 		RMLog(@"Could not connect to database - %@", [db lastErrorMessage]);
@@ -74,7 +74,7 @@
 
 -(NSUInteger) count
 {
-	FMResultSet *results = [db executeQuery:@"SELECT COUNT(ztileHash) FROM ZCACHE"];
+	RMFMResultSet *results = [db executeQuery:@"SELECT COUNT(ztileHash) FROM ZCACHE"];
 	
 	NSUInteger count = 0;
 	
@@ -92,7 +92,7 @@
 
 -(NSData*) dataForTile: (uint64_t) tileHash
 {
-	FMResultSet *results = [db executeQuery:@"SELECT zdata FROM ZCACHE WHERE ztilehash = ?", [NSNumber numberWithUnsignedLongLong:tileHash]];
+	RMFMResultSet *results = [db executeQuery:@"SELECT zdata FROM ZCACHE WHERE ztilehash = ?", [NSNumber numberWithUnsignedLongLong:tileHash]];
 	
 	if ([db hadError])
 	{
@@ -129,7 +129,7 @@
 -(void) purgeTilesFromBefore: (NSDate*) date;
 {
     NSUInteger count = 0;
-    FMResultSet *results = [db executeQuery:@"SELECT COUNT(ztileHash) FROM ZCACHE WHERE zInserted < ?", date];
+    RMFMResultSet *results = [db executeQuery:@"SELECT COUNT(ztileHash) FROM ZCACHE WHERE zInserted < ?", date];
 	if ([results next]) {
         count = [results intForColumnIndex:0];
         RMLog(@"Will purge %i tile(s) from before %@", count, date);

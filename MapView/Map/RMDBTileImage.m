@@ -37,7 +37,7 @@
 
 @implementation RMDBTileImage
 
-- (id)initWithTile:(RMTile)_tile fromDB:(FMDatabase*)db {
+- (id)initWithTile:(RMTile)_tile fromDB:(RMFMDatabase *)db {
 	self = [super initWithTile:_tile];
 	if (self != nil) {
 		// get the unique key for the tile
@@ -45,7 +45,7 @@
 		RMLog(@"fetching tile %@ (y:%d, x:%d)@%d", key, _tile.y, _tile.x, _tile.zoom);
 		
 		// fetch the image from the db
-		FMResultSet* rs = [db executeQuery:@"select image from tiles where tilekey = ?", key];
+		RMFMResultSet * rs = [db executeQuery:@"select image from tiles where tilekey = ?", key];
 		FMDBErrorCheck(db);
 		if ([rs next]) {
 			[self updateImageUsingImage:[[[UIImage alloc] initWithData:[rs dataForColumn:@"image"]] autorelease]];
